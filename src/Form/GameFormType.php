@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class GameFormType extends AbstractType
 {
@@ -26,7 +27,6 @@ class GameFormType extends AbstractType
             'attr' => [
                 'placeholder' => 'Monopoly',
             ],
-
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description',
@@ -35,7 +35,15 @@ class GameFormType extends AbstractType
                     'placeholder' => 'Jeu de société',
                 ],
             ])
-        ;
+            ->add('type', ChoiceType::class, [
+                'label' => 'Type de jeu',
+                'choices' => [
+                    'Jeu de plateau' => 'board_game',
+                    'Jeu de carte' => 'card_game',
+                    'Jeu de duel' => 'duel_game',
+                ],
+                'required' => true,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

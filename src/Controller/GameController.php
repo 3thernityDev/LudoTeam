@@ -23,6 +23,10 @@ final class GameController extends AbstractController
         $this->em = $em;
     }
 
+    #######
+    #INDEX#
+    ######
+
     #[Route('/', name: '_index')]
     public function index(): Response
     {
@@ -32,6 +36,10 @@ final class GameController extends AbstractController
             'games' => $games
         ]);
     }
+
+    ######
+    #SHOW#
+    ######
 
     #[Route('/show/{id}', name: '_show')]
     public function show(int $id): Response
