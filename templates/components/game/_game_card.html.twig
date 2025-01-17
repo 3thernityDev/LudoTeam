@@ -2,8 +2,16 @@
     <h2>{{ name }}</h2>
     <p>Description:</p>
     <p>{{ description }}</p>
+    {# VIEW BUTTON #}
+    <a href="{{ path('app_game_show', {id}) }}">
+        <button class="view"><i class="fa-solid fa-eye"></i></button>
+    </a>
     {# EDIT BUTTON #}
-    <button class="edit"><i class="fa-solid fa-circle-edit"></i></button>
+    <a href="">
+        <button class="edit"><i class="fa-solid fa-edit"></i></button>
+    </a>
     {# DELETE BUTTON #}
-    <button class="delete"><i class="fa-solid fa-circle-xmark"></i></button>
+    <a href="">
+        <button class="delete"><i class="fa-solid fa-circle-xmark"></i></button>
+    </a>
 </article>

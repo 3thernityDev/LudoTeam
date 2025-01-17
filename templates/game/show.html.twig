@@ -5,11 +5,15 @@
 {% endblock %} {% block body %}
 <div class="titlte">
     <h1>Liste des jeux</h1>
-    <button><i class="fa-solid fa-circle-plus"></i></button>
+    <a href="{{ path('app_game_index') }}">
+        <button>
+            <i class="fa-solid fa-backward"></i>
+        </button>
+    </a>
 </div>
 <div class="card-Container">
     {% include 'components/game/_game_card.html.twig' with { name: game.name,
-    description: game.description } %}
+    description: game.description, id: game.id } %}
 </div>
 
 {% endblock %}

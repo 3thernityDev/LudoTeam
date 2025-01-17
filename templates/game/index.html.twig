@@ -13,7 +13,7 @@
 </div>
 <div class="card-Container">
     {% for game in games %} {% include 'components/game/_game_card.html.twig'
-    with { name: game.name, description: game.description } %} {% endfor %}
+    with { name: game.name, description: game.description, id: game.id } %} {% endfor %}
 </div>
 
 {% endblock %}
