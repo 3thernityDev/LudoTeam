@@ -5,11 +5,10 @@ namespace App\Form;
 use App\Entity\Game;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class GameFormType extends AbstractType
 {
@@ -19,11 +18,6 @@ class GameFormType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Nom du jeu',
             'required' => true,
-            'constraints' => [
-                new NotBlank([
-                    'message' => 'Veuillez saisir un nom de jeu',
-                ]),
-            ],
             'attr' => [
                 'placeholder' => 'Monopoly',
             ],
@@ -43,6 +37,7 @@ class GameFormType extends AbstractType
                     'Jeu de duel' => 'duel_game',
                 ],
                 'required' => true,
+            'mapped' => false, // Empêche le mappage de ce champ à une propriété
             ]);
     }
 

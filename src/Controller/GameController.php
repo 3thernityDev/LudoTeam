@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Game;
+use App\Entity\BoardGame;
+use App\Entity\CardGame;
+use App\Entity\DuelGame;
 use App\Form\GameFormType;
 use App\Repository\GameRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,9 +26,9 @@ final class GameController extends AbstractController
         $this->em = $em;
     }
 
-    #######
+    ########
     #INDEX#
-    ######
+    ########
 
     #[Route('/', name: '_index')]
     public function index(): Response
@@ -37,9 +40,9 @@ final class GameController extends AbstractController
         ]);
     }
 
-    ######
+    ########
     #SHOW#
-    ######
+    ########
 
     #[Route('/show/{id}', name: '_show')]
     public function show(int $id): Response
@@ -58,22 +61,39 @@ final class GameController extends AbstractController
     #[Route('/create', name: '_create')]
     public function create(Request $request): Response
     {
-        $game = new Game();
+        $game = new Game();  // Commencer par une entité Game générique
 
         $form = $this->createForm(GameFormType::class, $game);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $existingGame = $this->gameRepository->findOneBy(['name' => $game->getName()]);
-            if ($existingGame) {
-                $this->addFlash('error', 'Un jeu avec le même nom existe déjà.');
-                return $this->redirectToRoute('app_game_create');
+            // Récupérer le type de jeu depuis le formulaire
+            $type = $form->get('type')->getData();
+
+            // Créer la bonne sous-classe selon le type sélectionné
+            switch ($type) {
+                case 'board_game':
+                    $game = new BoardGame();
+                    break;
+                case 'card_game':
+                    $game = new CardGame();
+                    break;
+                case 'duel_game':
+                    $game = new DuelGame();
+                    break;
+                default:
+                    throw new \Exception('Type de jeu inconnu');
             }
 
+            // Remplir les autres champs (nom, description, etc.)
+            $game->setName($form->get('name')->getData());
+            $game->setDescription($form->get('description')->getData());
+
+            // Persist et flush l'entité
             $this->em->persist($game);
             $this->em->flush();
 
+            // Redirection vers la page de détails du jeu créé
             return $this->redirectToRoute('app_game_show', ['id' => $game->getId()]);
         }
 
