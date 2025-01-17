@@ -18,17 +18,23 @@ class UserType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => 'Email',
                 'required' => true,
+            'attr' => [
                 'placeholder' => 'exemple@gmail.com',
+            ],
             ])
             ->add('password', PasswordType::class, [
                 'label' => 'Mot de passe',
                 'required' => true,
-                'placeholder' => 'Votre mots de passe',
+            'attr' => [
+                'placeholder' => 'Votre mot de passe',
+            ],
             ])
             ->add('username', TextType::class, [
                 'label' => 'Nom d\'utilisateur',
                 'required' => true,
+            'attr' => [
                 'placeholder' => 'Votre nom d\'utilisateur',
+            ],
             ])
         ;
     }
