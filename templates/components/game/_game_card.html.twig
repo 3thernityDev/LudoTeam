@@ -11,7 +11,7 @@
         <button class="edit"><i class="fa-solid fa-edit"></i></button>
     </a>
     {# DELETE BUTTON #}
-    <a href="">
+    <a href="{{ path('app_game_delete', {id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce jeu ?')"></a>
         <button class="delete"><i class="fa-solid fa-circle-xmark"></i></button>
     </a>
 </article>
