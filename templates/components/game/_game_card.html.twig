@@ -1,0 +1,17 @@
+<article>
+    <h2>{{ name }}</h2>
+    <p>Description:</p>
+    <p>{{ description }}</p>
+    {# VIEW BUTTON #}
+    <a href="{{ path('app_game_show', {id}) }}">
+        <button class="view"><i class="fa-solid fa-eye"></i></button>
+    </a>
+    {# EDIT BUTTON #}
+    <a href="{{ path('app_game_update', {id}) }}">
+        <button class="edit"><i class="fa-solid fa-edit"></i></button>
+    </a>
+    {# DELETE BUTTON #}
+    <a href="{{ path('app_game_delete', {id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce jeu ?')"></a>
+        <button class="delete"><i class="fa-solid fa-circle-xmark"></i></button>
+    </a>
+</article>

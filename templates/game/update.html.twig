@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %} 
+{% block title %}Modifier un jeu{% endblock %} 
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('styles/form/form.css') }}" />
+<link rel="stylesheet" href="{{ asset('styles/app.css') }}" />
+{% endblock %} 
+{% block body %}
+<div class="form-container">
+    <div class="titlte">
+        <h1>Modifier un jeu</h1>
+        <a href="{{ path('app_game_index') }}">
+            <button>
+                <i class="fa-solid fa-backward"></i>
+            </button>
+        </a>
+    </div>
+    {{ form_start(form) }}
+    <div class="form-group">
+        <label for="{{ form.name.vars.id }}">Nom du jeu</label>
+        {{ form_widget(form.name, {'attr': {'class': 'form-input', 'placeholder': game.name}}) }}
+        {{ form_errors(form.name) }}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.description.vars.id }}">Description</label>
+        {{ form_widget(form.description, {'attr': {'class': 'form-input', 'placeholder': game.description}}) }}
+        {{ form_errors(form.description) }}
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="submit-btn">Mettre à jour le jeu</button>
+        <a href="{{ path('app_game_index') }}">
+            <button type="button" class="cancel-btn">Annuler</button>
+        </a>
+    </div>
+    {{ form_end(form) }}
+</div>
+{% endblock %}
