@@ -1,8 +1,12 @@
 {% extends 'base.html.twig' %} {% block title %} Liste des Jeux {% endblock %}
 {% block stylesheets %}
 <link rel="stylesheet" href="{{ asset('styles/game/card.css') }}" />
+<link rel="stylesheet" href="{{ asset('styles/app.css') }}" />
 {% endblock %} {% block body %}
-<h1>Liste des jeux</h1>
+<div class="titlte">
+    <h1>Liste des jeux</h1>
+    <button><i class="fa-solid fa-circle-plus"></i></button>
+</div>
 <div class="card-Container">
     {% for game in games %} {% include 'components/game/_game_card.html.twig'
     with { name: game.name, description: game.description } %} {% endfor %}
