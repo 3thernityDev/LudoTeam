@@ -17,15 +17,16 @@ class GameFormType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => 'Nom du jeu',
-                'required' => true,
-                'attr' => [
-                    'placeholder' => 'Monopoly',
-                ],
-            'Constraints' => [
+            'required' => true,
+            'constraints' => [
                 new NotBlank([
                     'message' => 'Veuillez saisir un nom de jeu',
                 ]),
             ],
+            'attr' => [
+                'placeholder' => 'Monopoly',
+            ],
+
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description',

@@ -5,7 +5,11 @@
 {% endblock %} {% block body %}
 <div class="titlte">
     <h1>Liste des jeux</h1>
-    <button><i class="fa-solid fa-circle-plus"></i></button>
+    <a href="{{ path('app_game_create') }}">
+        <button>
+            <i class="fa-solid fa-circle-plus"></i>
+        </button>
+    </a>
 </div>
 <div class="card-Container">
     {% for game in games %} {% include 'components/game/_game_card.html.twig'

@@ -43,42 +43,102 @@ label {
     margin-bottom: 5px;
 }
 
-/* Style for buttons */
-button {
-    background-color: #ff7043; 
+/* Title Section */
+.titlte {
+    background-color: #ff7043; /* Orange */
     color: white;
-    padding: 12px 20px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.titlte h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.titlte button {
+    background-color: #fff;
     border: none;
+    padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s;
 }
 
-button:hover {
-    background-color: #ff5722; 
+.titlte button:hover {
+    background-color: #e0e0e0;
 }
 
-/* Error messages */
-.form-error {
-    color: #e53935; 
-    font-size: 14px;
-    margin-top: 5px;
+.titlte i {
+    font-size: 20px;
+    color: #ff7043;
 }
 
-/* Success messages */
-.form-success {
-    color: #43a047; 
-    font-size: 14px;
-    margin-top: 5px;
+/* Style for form-group (container for labels and input fields) */
+.form-group {
+    margin-bottom: 20px;
 }
 
-/* Style for the form container */
-.form-container {
+.form-group .form-input {
     width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #fff;
+}
+
+.form-group .form-input:focus {
+    border-color: #ff7043;
+    outline: none;
+}
+
+/* Style for error messages */
+.form-error {
+    color: #e53935;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Submit and Cancel buttons */
+.form-actions {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.submit-btn,
+.cancel-btn {
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.submit-btn {
+    background-color: #ff7043;
+    color: white;
+    border: none;
+}
+
+.submit-btn:hover {
+    background-color: #ff5722;
+}
+
+.cancel-btn {
+    background-color: #ddd;
+    color: #333;
+}
+
+.cancel-btn:hover {
+    background-color: #bbb;
 }
 
 /* Responsive styling for small screens */
@@ -94,7 +154,9 @@ button:hover {
         font-size: 14px;
     }
 
-    button {
+    button,
+    .submit-btn,
+    .cancel-btn {
         padding: 10px 15px;
     }
 }
