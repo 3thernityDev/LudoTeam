@@ -31,4 +31,14 @@ final class GameController extends AbstractController
             'games' => $games
         ]);
     }
+
+    #[Route('/{id}', name: '_show')]
+    public function show(int $id): Response
+    {
+        $game = $this->gameRepository->find($id);
+
+        return $this->render('game/show.html.twig', [
+            'game' => $game
+        ]);
+    }
 }
