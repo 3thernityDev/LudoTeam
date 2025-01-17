@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %} {% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('styles/form/form.css') }}" />
+<link rel="stylesheet" href="{{ asset('styles/app.css') }}" />
+{% endblock %} {% block title %}New Event{% endblock %} {% block body %}
+<h1>Create new Event</h1>
+
+{{ include("event/_form.html.twig") }}
+
+<a href="{{ path('app_event_index') }}">back to list</a>
+{% endblock %}
