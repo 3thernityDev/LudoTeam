@@ -14,6 +14,7 @@
 
         {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('styles/app.css') }}" />
+        <link rel="stylesheet" href="{{ asset('styles/navbar/navbar.css') }}" />
         {% endblock %} {# Message Flash #} {% for type, messages in
         app.session.flashbag.all() %} {% for message in messages %}
         <div class="alert alert-{{ type }}">
@@ -23,6 +24,8 @@
         %} {% endblock %}
     </head>
     <body>
+        {# Include ma navbar #}
+        {% include 'components/navbar/navbar.html.twig' %}
         {% block body %}{% endblock %}
     </body>
 </html>

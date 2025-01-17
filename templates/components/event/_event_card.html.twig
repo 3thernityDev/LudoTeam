@@ -1,0 +1,24 @@
+<article>
+    <h2>{{ name }}</h2>
+    <p>Date: {{ date ? date|date('Y-m-d H:i:s') : '' }}</p>
+    <p>Organisateur: {{ orga ? orga.username : 'Inconnu' }}</p>
+
+    <p>Participants:
+        {% for participant in participants %}
+            {{ participant.username }}{% if not loop.last %}, {% endif %}
+        {% endfor %}
+    </p>
+
+    {# VIEW BUTTON #}
+    <a href="{{ path('app_event_show', {id: id}) }}">
+        <button class="view"><i class="fa-solid fa-eye"></i></button>
+    </a>
+    {# EDIT BUTTON #}
+    <a href="{{ path('app_event_edit', {id: id}) }}">
+        <button class="edit"><i class="fa-solid fa-edit"></i></button>
+    </a>
+    {# DELETE BUTTON #}
+    <a href="{{ path('app_event_delete', {id: id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet événement ?')">
+        <button class="delete"><i class="fa-solid fa-circle-xmark"></i></button>
+    </a>
+</article>

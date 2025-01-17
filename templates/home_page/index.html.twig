@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %} {% block title %}Page d'accueil{% endblock %} {%
+block stylesheets %}
+<link rel="stylesheet" href="{{ asset('styles/app.css') }}" />
+<link rel="stylesheet" href="{{ asset('styles/game/card.css') }}" />
+{% endblock %} {% block body %}
+<div class="container">
+    <h1>Bienvenue!</h1>
+
+    <!-- Section des événements -->
+    <div class="section">
+        <h2>Derniers Événements</h2>
+        {% if events is not empty %}
+        <div class="card-Container">
+            {% for event in events %}
+            <article>
+                <h2>{{ event.name }}</h2>
+                <p>
+                    <strong>Date :</strong>
+                    {{ event.date ? event.date|date('d/m/Y H:i') : 'Pas de date disponible' }}
+                </p>
+                <a href="{{ path('app_event_show', { id: event.id }) }}">
+                    <button class="view">
+                        <i class="fas fa-eye"></i> Voir Détails
+                    </button>
+                </a>
+            </article>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p>Aucun événement disponible pour le moment.</p>
+        {% endif %}
+    </div>
+
+    <!-- Section des jeux -->
+    <div class="section">
+        <h2>Derniers Jeux</h2>
+        {% if games is not empty %}
+        <div class="card-Container">
+            {% for game in games %}
+            <article>
+                <h2>{{ game.name }}</h2>
+                <p>Description:</p>
+                <p>{{ game.description }}</p>
+                <a href="{{ path('app_game_show', { id: game.id }) }}">
+                    <button class="view">
+                        <i class="fas fa-eye"></i> Voir Détails
+                    </button>
+                </a>
+            </article>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p>Aucun jeu disponible pour le moment.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

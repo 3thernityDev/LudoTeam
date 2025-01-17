@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block title %} Liste des Événements {% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('styles/event/card.css') }}" />
+<link rel="stylesheet" href="{{ asset('styles/app.css') }}" />
+{% endblock %}
+{% block body %}
+<div class="titlte">
+    <h1>Liste des événements</h1>
+    <a href="{{ path('app_event_new') }}">
+        <button>
+            <i class="fa-solid fa-circle-plus"></i>
+        </button>
+    </a>
+</div>
+<div class="card-Container">
+    {% for event in events %}
+        {% include 'components/event/_event_card.html.twig' with { name: event.name, date: event.date, id: event.id, orga: event.orga, participants: event.participants } %}
+    {% endfor %}
+</div>
+{% endblock %}

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -35,6 +37,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $username = null;
+
+    /**
+     * @var Collection<int, Event>
+     */
+    #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'orga')]
+    private Collection $events;
+
+    /**
+     * @var Collection<int, Event>
+     */
+    #[ORM\ManyToMany(targetEntity: Event::class, mappedBy: 'participants')]
+    private Collection $participation;
+
+    public function __construct()
+    {
+        $this->events = new ArrayCollection();
+        $this->participation = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -119,6 +139,63 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUsername(string $username): static
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Event>
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): static
+    {
+        if (!$this->events->contains($event)) {
+            $this->events->add($event);
+            $event->setOrga($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): static
+    {
+        if ($this->events->removeElement($event)) {
+            // set the owning side to null (unless already changed)
+            if ($event->getOrga() === $this) {
+                $event->setOrga(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Event>
+     */
+    public function getParticipation(): Collection
+    {
+        return $this->participation;
+    }
+
+    public function addParticipation(Event $participation): static
+    {
+        if (!$this->participation->contains($participation)) {
+            $this->participation->add($participation);
+            $participation->addParticipant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipation(Event $participation): static
+    {
+        if ($this->participation->removeElement($participation)) {
+            $participation->removeParticipant($this);
+        }
 
         return $this;
     }
