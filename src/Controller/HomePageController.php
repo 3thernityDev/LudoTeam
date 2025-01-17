@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class HomePageController extends AbstractController
 {
-    #[Route('/home/page', name: 'app_home_page')]
+    #[Route('/', name: 'app_home_page')]
     public function index(EventRepository $eventRepository, GameRepository $gameRepository): Response
     {
         $events = $eventRepository->findBy([], ['date' => 'DESC'], 5);
