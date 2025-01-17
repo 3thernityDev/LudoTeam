@@ -1,0 +1,42 @@
+/* Styles pour les cartes */
+article {
+    background-color: #FFEDD5; /* Couleur orange clair */
+    border: 2px solid #FF8C42; /* Bordure orange vif */
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    padding: 20px;
+    margin: 20px;
+    max-width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Effet au survol */
+article:hover {
+    transform: translateY(-10px); /* Légère élévation */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Ombre plus marquée */
+}
+
+/* Titre de la carte */
+article h2 {
+    font-size: 1.5rem;
+    color: #D35400; /* Orange foncé */
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Description de la carte */
+article p {
+    font-size: 1rem;
+    color: #5A3E36; /* Brun pour contraste */
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.card-Container {
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 20px; 
+    justify-content: center; 
+    align-items: flex-start; 
+    padding: 10px; 
+}
