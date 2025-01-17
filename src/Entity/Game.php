@@ -1,11 +1,15 @@
 <?php
 
+// src/Entity/Game.php
+
 namespace App\Entity;
 
-use App\Repository\GameRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: GameRepository::class)]
+#[ORM\Entity]
+#[ORM\InheritanceType("SINGLE_TABLE")]
+#[ORM\DiscriminatorColumn(name: "type", type: "string")]
+#[ORM\DiscriminatorMap(['board_game' => BoardGame::class, 'card_game' => CardGame::class, 'duel_game' => DuelGame::class])]
 class Game
 {
     #[ORM\Id]
@@ -18,6 +22,12 @@ class Game
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
+
+    // Ajouter le getter pour le type (discriminator column)
+    public function getType(): ?string
+    {
+        return $this::class;
+    }
 
     public function getId(): ?int
     {
@@ -32,7 +42,6 @@ class Game
     public function setName(string $name): static
     {
         $this->name = $name;
-
         return $this;
     }
 
@@ -44,7 +53,6 @@ class Game
     public function setDescription(?string $description): static
     {
         $this->description = $description;
-
         return $this;
     }
 }

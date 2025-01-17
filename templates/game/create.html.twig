@@ -12,14 +12,11 @@ block stylesheets %}
             </button>
         </a>
     </div>
+
     {{ form_start(form) }}
     <div class="form-group">
         <label for="{{ form.name.vars.id }}">Nom du jeu</label>
         {{ form_widget(form.name, {'attr': {'class': 'form-input', 'placeholder': 'Monopoly'
-
-
-
-
         }}) }}
         {{ form_errors(form.name) }}
     </div>
@@ -27,12 +24,14 @@ block stylesheets %}
     <div class="form-group">
         <label for="{{ form.description.vars.id }}">Description</label>
         {{ form_widget(form.description, {'attr': {'class': 'form-input', 'placeholder': 'Jeu de société'
-
-
-
-
         }}) }}
         {{ form_errors(form.description) }}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.type.vars.id }}">Type de jeu</label>
+        {{ form_widget(form.type, {'attr': {'class': 'form-input'}}) }}
+        {{ form_errors(form.type) }}
     </div>
 
     <div class="form-actions">
