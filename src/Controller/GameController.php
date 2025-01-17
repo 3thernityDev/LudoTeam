@@ -57,6 +57,12 @@ final class GameController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $existingGame = $this->gameRepository->findOneBy(['name' => $game->getName()]);
+            if ($existingGame) {
+                $this->addFlash('error', 'Un jeu avec le même nom existe déjà.');
+                return $this->redirectToRoute('app_game_create');
+            }
+
             $this->em->persist($game);
             $this->em->flush();
 
@@ -66,5 +72,51 @@ final class GameController extends AbstractController
         return $this->render('game/create.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    ########
+    #UPDATE#
+    ########
+
+    #[Route('/update/{id}', name: '_update')]
+    public function edit(Request $request, int $id): Response
+    {
+        $game = $this->gameRepository->find($id);
+
+        if (!$game) {
+            throw $this->createNotFoundException('Jeu non trouvé !');
+        }
+
+        $form = $this->createForm(GameFormType::class, $game);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->em->flush();
+            return $this->redirectToRoute('app_game_index');
+        }
+
+        return $this->render('game/update.html.twig', [
+            'form' => $form->createView(),
+            'game' => $game,
+        ]);
+    }
+
+    ########
+    #DELETE#
+    ########
+
+    #[Route('/delete/{id}', name: '_delete')]
+    public function delete(int $id): Response
+    {
+        $game = $this->gameRepository->find($id);
+
+        if (!$game) {
+            throw $this->createNotFoundException('Jeu non trouvé !');
+        }
+
+        $this->em->remove($game);
+        $this->em->flush();
+
+        return $this->redirectToRoute('app_game_index');
     }
 }
